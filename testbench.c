@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 */
 /**
  * @file 		testbench.c
  *
@@ -6,7 +7,7 @@
  * @copyright 	Copyright (C) 2024 Jackrabbit Founders LLC. All rights reserved.
  *
  * @date 		Feb 2024
- * @author 		Barrett Edwards <barrett@jrlabs.io>
+ * @author 		Barrett Edwards <code@jrlabs.io>
  * 
  */
 

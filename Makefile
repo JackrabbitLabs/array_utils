@@ -1,31 +1,49 @@
-# arrayutils Makefile
+# SPDX-License-Identifier: Apache-2.0
+# ******************************************************************************
+#
+# @file			Makefile
+#
+# @brief        Makefile for Array Utility Function library
+#
+# @copyright    Copyright (C) 2024 Jackrabbit Founders LLC. All rights reserved.
+#
+# @date         Mar 2024
+# @author       Barrett Edwards <code@jrlabs.io>
+#
+# ******************************************************************************
+
 CC=gcc
 CFLAGS= -g3 -O0 -Wall -Wextra
-INCLUDE_DIR=/usr/local/include/
+MACROS=
+INCLUDE_DIR=/usr/local/include
 LIB_DIR=/usr/local/lib
 INCLUDE_PATH=-I $(INCLUDE_DIR) 
 LIB_PATH=-L $(LIB_DIR)
 LIBS=
+TARGET=arrayutils
 
-all: testbench libarrayutils.a
+all: testbench lib$(TARGET).a
 
-testbench: testbench.c arrayutils.o
-	$(CC) $^ $(CFLAGS) $(INCLUDE_PATH) $(LIB_PATH) $(LIBS) -o $@ 
+testbench: testbench.c main.o
+	$(CC) $^ $(CFLAGS) $(MACROS) $(INCLUDE_PATH) $(LIB_PATH) $(LIBS) -o $@ 
 
-libarrayutils.a: arrayutils.o
+lib$(TARGET).a: main.o
 	ar rcs $@ $^
 
-arrayutils.o: arrayutils.c arrayutils.h
-	$(CC) -c $< $(CFLAGS) $(INCLUDE_PATH) -o $@ 
+main.o: main.c main.h
+	$(CC) -c $< $(CFLAGS) $(MACROS) $(INCLUDE_PATH) -o $@ 
 
 clean:
 	rm -rf ./*.o ./*.a testbench
 
-install: libarrayutils.a 
-	sudo cp libarrayutils.a $(LIB_DIR)
-	sudo cp arrayutils.h $(INCLUDE_DIR)
+doc: 
+	doxygen
 
-.PHONY: all clean install
+install: lib$(TARGET).a 
+	sudo cp lib$(TARGET).a $(LIB_DIR)/
+	sudo cp main.h $(INCLUDE_DIR)/$(TARGET).h
+
+.PHONY: all clean doc install
 
 # Variables 
 # $^ 	Will expand to be all the sensitivity list
