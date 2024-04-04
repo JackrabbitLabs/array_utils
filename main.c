@@ -25,7 +25,7 @@
  */
 #include <string.h>
 
-#include "arrayutils.h"
+#include "main.h"
 
 /* MACROS ====================================================================*/
 
