@@ -31,7 +31,7 @@
  */
 #include <linux/types.h>
 
-#include "arrayutils.h"
+#include "main.h"
 
 /* MACROS ====================================================================*/
 
